@@ -15,7 +15,7 @@
         "rows": ["A14", "A15", "B3", "B4", "A0"]
     },
     "processor": "STM32F072",
-    "url": "",
+    "url": "https://github.com/ShuryFromTemu/QMK-Shury60",
     "usb": {
         "device_version": "1.0.0",
         "pid": "0x0000",

@@ -3,12 +3,29 @@
 //
 
 // trackpoint.c
+
 #include "trackpoint.h"
 
 #define DEFAULT_SPEED 1
 
 #define TRACKPOINT_INTERRUPT_PIN       GPIO_PIN_13
 #define TRACKPOINT_INTERRUPT_PORT      GPIOC
+
+
+
+
+
+void i2c_init(void)
+{
+    gpio_set_pin_input_mode(I2C1_SLC_PIN);
+    gpio_set_pin_input_mode(I2C1_SDA_PIN);
+    wait_ms(10);
+
+    palSetPadMode(GPIOB, 6, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN | PAL_STM32_PUPDR_PULLUP);
+    palSetPadMode(GPIOB, 7, PAL_MODE_ALTERNATE(4) | PAL_STM32_OTYPE_OPENDRAIN | PAL_STM32_PUPDR_PULLUP);
+
+    
+}
 
 // 私有函数声明
 static HAL_StatusTypeDef TrackPoint_SendCommand(TrackPoint_HandleTypeDef *htp, uint8_t *cmd);
