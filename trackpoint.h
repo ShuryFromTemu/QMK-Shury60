@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-//
-// Created by wwwqi on 2026/1/28.
-//
-#pragma once
-#include "pointing_device.h"
-#include "i2c_master.h"
-#include "timer.h"
-#include "gpio.h"
-=======
 // Copyright 2025 shury
 // SPDX-License-Identifier: GPL-2.0-or-later
 //
@@ -20,16 +10,12 @@
 #pragma once
 
 #include <stdbool.h>
->>>>>>> 9a922fe (trackpoint avaliable now, but matrix not completed)
 #include <stdint.h>
 
 /* ---------------- TrackPoint I2C ---------------- */
 
 #define TRACKPOINT_I2C_ADDRESS 0x15  // 7 位地址
 
-<<<<<<< HEAD
-void i2c_init(void);
-=======
 // 注意：QMK 的 i2c_master(ChibiOS 后端) 要求传入 8 位（已左移）地址，
 // 内部会再右移一位，所以这里保持和 HAL 版一致的 0x2A / 0x2B。
 #define TRACKPOINT_WRITE_ADDRESS ((TRACKPOINT_I2C_ADDRESS << 1) & 0xFE)  // 0x2A
@@ -38,7 +24,6 @@ void i2c_init(void);
 #ifndef TRACKPOINT_I2C_TIMEOUT
 #    define TRACKPOINT_I2C_TIMEOUT 20  // ms（QMK 的 i2c 超时单位是毫秒）
 #endif
->>>>>>> 9a922fe (trackpoint avaliable now, but matrix not completed)
 
 /* ---------------- 数据就绪引脚 DR ---------------- */
 
@@ -84,20 +69,6 @@ typedef struct {
 
 /* ---------------- 对外接口 ---------------- */
 
-<<<<<<< HEAD
-// 函数声明
-bool TrackPoint_Init(TrackPoint_HandleTypeDef *htp);
-bool TrackPoint_ReadData(TrackPoint_HandleTypeDef *htp);
-bool TrackPoint_Sleep(TrackPoint_HandleTypeDef *htp);
-bool TrackPoint_Wakeup(TrackPoint_HandleTypeDef *htp);
-bool TrackPoint_Reset(TrackPoint_HandleTypeDef *htp);
-bool TrackPoint_SetSpeed(TrackPoint_HandleTypeDef *htp,
-                                      uint8_t up_speed, uint8_t down_speed,
-                                      uint8_t left_speed, uint8_t right_speed);
-void TrackPoint_GPIO_EXTI_Callback(TrackPoint_HandleTypeDef *htp);
-uint8_t TrackPoint_IsDataReady(TrackPoint_HandleTypeDef *htp);
-bool TrackPoint_SendHidReport(TrackPoint_HandleTypeDef *htp);
-=======
 // 初始化（内部会调用 i2c_init()，等待上电、复位、设速度、清掉残留数据）
 bool trackpoint_init(void);
 
@@ -115,4 +86,3 @@ bool trackpoint_reset(void);
 bool trackpoint_set_speed(uint8_t up_speed, uint8_t down_speed, uint8_t left_speed, uint8_t right_speed);
 bool trackpoint_sleep(void);
 bool trackpoint_wakeup(void);
->>>>>>> 9a922fe (trackpoint avaliable now, but matrix not completed)
